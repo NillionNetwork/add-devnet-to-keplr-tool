@@ -1,12 +1,13 @@
 {
   "name": "@nillion/add-devnet-chain-to-keplr",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "src/server.js",
   "bin": {
     "add-devnet-chain-to-keplr": "bin/add-devnet-chain.js"
   },
   "scripts": {
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "test": "exit 0"
   },
   "dependencies": {
     "dotenv": "^10.0.0",
