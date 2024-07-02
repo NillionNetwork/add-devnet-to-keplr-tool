@@ -1,0 +1,91 @@
+<header>
+  <h1>{{subtitle}}</h1>
+</header>
+<main>
+  <section>
+    <blockquote class="tip-blockquote">The chain, transactions, and balances will all reset each time you restart <code>nillion-devnet</code></blockquote>
+  </section>
+  <section>
+    <h3>First, add the chain in the Keplr popup</h3>
+  </section>
+  <section>
+    <h3>Then, import funded wallet private key(s) to your Keplr account</h3>
+    <ol>
+      <li>{{ env.NILLION_NILCHAIN_PRIVATE_KEY_0 }}</li>
+      <li>{{ env.NILLION_NILCHAIN_PRIVATE_KEY_1 }}</li>
+      <li>{{ env.NILLION_NILCHAIN_PRIVATE_KEY_2 }}</li>
+      <li>{{ env.NILLION_NILCHAIN_PRIVATE_KEY_3 }}</li>
+      <li>{{ env.NILLION_NILCHAIN_PRIVATE_KEY_4 }}</li>
+      <li>{{ env.NILLION_NILCHAIN_PRIVATE_KEY_5 }}</li>
+      <li>{{ env.NILLION_NILCHAIN_PRIVATE_KEY_6 }}</li>
+      <li>{{ env.NILLION_NILCHAIN_PRIVATE_KEY_7 }}</li>
+      <li>{{ env.NILLION_NILCHAIN_PRIVATE_KEY_8 }}</li>
+      <li>{{ env.NILLION_NILCHAIN_PRIVATE_KEY_9 }}</li>
+    </ol>
+  </section>
+  <hr/>
+  <section>
+    <p>👉&nbsp;<a href="https://help.keplr.app/articles/import-recover-existing-wallet">How to import private key into Keplr</a></p>
+  <p>🛟&nbsp;<a href="https://github.com/orgs/NillionNetwork/discussions">Get Help</a></p>
+  </section>
+</main>
+<footer><a href="https://www.nillion.com">Nillion</a></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+  const chainConfig = {
+    chainId: "{{ env.NILLION_NILCHAIN_CHAIN_ID }}",
+    chainName: "{{ env.NILLION_NILCHAIN_CHAIN_ID }}", 
+    rpc: "{{ env.NILLION_NILCHAIN_JSON_RPC }}",
+    rest: "{{ env.NILLION_NILCHAIN_REST_API }}",
+    bip44: { coinType: 118 },
+    bech32Config: {
+      bech32PrefixAccAddr: "nillion",
+      bech32PrefixAccPub: "nillionpub",
+      bech32PrefixValAddr: "nillionvaloper",
+      bech32PrefixValPub: "nillionvaloperpub",
+      bech32PrefixConsAddr: "nillionvalcons",
+      bech32PrefixConsPub: "nillionvalconspub"
+    },
+    currencies: [
+      {
+        coinDenom: "NIL",
+        coinMinimalDenom: "unil",
+        coinDecimals: 6,
+        coinGeckoId: "nillion"
+      }
+    ],
+    feeCurrencies: [
+      {
+        coinDenom: "NIL",
+        coinMinimalDenom: "unil",
+        coinDecimals: 6,
+        coinGeckoId: "nillion",
+        gasPriceStep: {
+          low: 0.001,
+          average: 0.001,
+          high: 0.01
+        }
+      }
+    ],
+    stakeCurrency: {
+      coinDenom: "NIL",
+      coinMinimalDenom: "unil",
+      coinDecimals: 6,
+      coinGeckoId: "nillion"
+    }
+  };
+
+  console.log(JSON.stringify(chainConfig, null, 4));
+  $(document).ready(function () {
+    (async function () {
+      if (!window.keplr) {
+        alert("Please install keplr extension");
+      } else {
+        console.log(`>> START adding chain`);
+        await window.keplr.experimentalSuggestChain(chainConfig);
+        console.log(`<< DONE adding chain`);
+      }
+    })();
+  });
+</script>
